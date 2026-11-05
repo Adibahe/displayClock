@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-style="retro" data-theme="green" data-crt="on">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -8,85 +8,111 @@
 <link rel="icon" href="icon-192.png">
 <title>Retro Desk Clock</title>
 <style>
-:root{--green:#9dff9b;--dim:#7bbd85;--amber:#ffc66d;--line:#21452b;--btn:#0b2414;--btnline:#9dff9b;--btnact:#1d4a2b;--date:#9dff9b;--inp:#05110a;--bg:#07110b;--s1:#0c2013;--s2:#040d08;--glow1:rgba(157,255,155,.5);--glow2:rgba(80,255,120,.2);--pan:rgba(5,16,9,.8);--dlg:#0b1c12;--sglow:#a96b28;--inset:#07140b}
+:root{--font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",Arial,sans-serif;--green:#ffeccf;--dim:#b8a58a;--amber:#ffb86b;--line:#3a2f22;--btn:#22190f;--btnline:#6b5638;--btnact:#33261a;--date:#e8d3b0;--inp:#120d07;--bg:#0d0905;--s1:#1a130b;--s2:#0a0704;--glow1:rgba(255,220,170,.30);--glow2:rgba(255,190,120,.12);--pan:rgba(18,12,7,.55);--dlg:#1a130b;--sglow:rgba(255,184,107,.35);--inset:#0d0905}
+:root[data-style="retro"]{--font:ui-monospace,"SF Mono","Roboto Mono","Cascadia Mono",Consolas,"Courier New",monospace}
+:root[data-theme="green"]{--green:#9dff9b;--dim:#7bbd85;--amber:#ffc66d;--line:#21452b;--btn:#0b2414;--btnline:#9dff9b;--btnact:#1d4a2b;--date:#9dff9b;--inp:#05110a;--bg:#07110b;--s1:#0c2013;--s2:#040d08;--glow1:rgba(157,255,155,.5);--glow2:rgba(80,255,120,.2);--pan:rgba(5,16,9,.8);--dlg:#0b1c12;--sglow:#a96b28;--inset:#07140b}
 :root[data-theme="amber"]{--green:#ffc66d;--dim:#c29a55;--amber:#ffe2a8;--line:#4a3412;--btn:#2a1d09;--btnline:#7a5a25;--btnact:#3d2a0d;--date:#ffd99a;--inp:#130d04;--bg:#110b04;--s1:#251a0a;--s2:#0d0803;--glow1:rgba(255,198,109,.55);--glow2:rgba(255,150,60,.22);--pan:rgba(20,13,5,.8);--dlg:#1c1308;--sglow:rgba(255,226,168,.55);--inset:#140d05}
 :root[data-theme="red"]{--green:#ff6b5e;--dim:#c0645c;--amber:#ff9a8a;--line:#4a1a16;--btn:#2a0e0c;--btnline:#7a3029;--btnact:#3d1512;--date:#ff9a8f;--inp:#130504;--bg:#110504;--s1:#250c09;--s2:#0d0302;--glow1:rgba(255,107,94,.5);--glow2:rgba(255,60,50,.2);--pan:rgba(20,6,5,.8);--dlg:#1c0a08;--sglow:rgba(255,154,138,.55);--inset:#140605}
 :root[data-theme="ice"]{--green:#d8ecff;--dim:#9db6cb;--amber:#9fd0ff;--line:#223647;--btn:#0e1a26;--btnline:#3b5870;--btnact:#19293a;--date:#bcd8f0;--inp:#070d13;--bg:#060b10;--s1:#0d1a26;--s2:#04080c;--glow1:rgba(216,236,255,.5);--glow2:rgba(120,180,255,.2);--pan:rgba(6,12,18,.8);--dlg:#0c1822;--sglow:rgba(159,208,255,.55);--inset:#070f16}
+:root[data-theme="night"]{--green:#c0453a;--dim:#a8382f;--amber:#d4574a;--line:#2a100d;--btn:#180807;--btnline:#4a1c18;--btnact:#26100d;--date:#b8443a;--inp:#0c0404;--bg:#050202;--s1:#0a0403;--s2:#030101;--glow1:rgba(184,58,48,.22);--glow2:rgba(184,58,48,.08);--pan:rgba(10,4,3,.6);--dlg:#120605;--sglow:rgba(212,87,74,.28);--inset:#050202}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--green);font-family:ui-monospace,"SF Mono","Roboto Mono","Cascadia Mono",Consolas,"Courier New",monospace}
-body{display:flex;align-items:center;justify-content:center;padding:clamp(6px,1.2vw,14px);background:radial-gradient(ellipse at center,var(--btn) 0%,var(--bg) 72%)}
-.screen{width:100%;height:100%;border:2px solid var(--line);border-radius:18px;background:linear-gradient(145deg,var(--s1),var(--s2));box-shadow:0 0 35px var(--line),inset 0 0 30px var(--inset);display:flex;flex-direction:column;padding:clamp(14px,2.4vw,30px);position:relative;overflow:hidden;transition:transform 3s ease}
-.screen:after{content:"";pointer-events:none;position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.10) 4px);opacity:.35}
-:root[data-crt="off"] .screen:after{display:none}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background-color:var(--bg);color:var(--green);font-family:var(--font);transition:background-color 1.4s ease}
+body{display:flex;align-items:center;justify-content:center;padding:clamp(6px,1.2vw,14px);background-image:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.04) 0%,rgba(255,255,255,0) 70%)}
+.screen{width:100%;height:100%;border:2px solid transparent;border-radius:18px;background:transparent;display:flex;flex-direction:column;padding:clamp(14px,2.4vw,30px);position:relative;overflow:hidden;transition:transform 3s ease}
+.screen:after{content:"";pointer-events:none;position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.10) 4px);opacity:.35;display:none}
+:root[data-style="retro"] .screen{border-color:var(--line);background:linear-gradient(145deg,var(--s1),var(--s2));box-shadow:0 0 35px var(--line),inset 0 0 30px var(--inset)}
+:root[data-style="retro"][data-crt="on"] .screen:after{display:block}
+:root[data-night="1"] .screen:after{display:none!important}
 /* true fullscreen / installed app: drop the frame so the clock owns the whole display */
 :root:-webkit-full-screen body{padding:0}
 :root:-webkit-full-screen .screen{border:0;border-radius:0;box-shadow:none}
 :root:fullscreen body{padding:0}
 :root:fullscreen .screen{border:0;border-radius:0;box-shadow:none}
 @media(display-mode:fullscreen){body{padding:0}.screen{border:0;border-radius:0;box-shadow:none}}
-header,.clock,.bottom,.toolbar{position:relative;z-index:1}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(11px,1.6vw,15px);color:var(--dim)}
-.brand{color:var(--green);font-weight:bold}
-.status{display:flex;gap:15px;align-items:center}
+header,.clock,.controls{position:relative;z-index:1}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid transparent;padding-bottom:12px;text-transform:uppercase;letter-spacing:.14em;font-size:clamp(11px,1.5vw,14px);color:var(--dim);transition:opacity .9s ease,color 1.4s ease,border-color 1.4s ease}
+:root[data-style="retro"] header{border-bottom-color:var(--line);letter-spacing:.18em}
+.brand{display:none;color:var(--green);font-weight:bold}
+:root[data-style="retro"] .brand{display:inline}
+.status{display:flex;gap:15px;align-items:center;margin-left:auto}
 .clock{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:0}
-.time{font-size:min(25vw,40vh);font-weight:bold;letter-spacing:-.075em;line-height:1;text-shadow:0 0 10px var(--glow1),0 0 28px var(--glow2);font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer}
-.seconds{font-size:.38em;color:var(--amber);letter-spacing:-.04em;vertical-align:baseline;margin-left:.08em;text-shadow:0 0 12px var(--sglow)}
-.ampm{font-size:.2em;color:var(--dim);letter-spacing:0;margin-left:.3em;text-shadow:none}
-.date{margin-top:18px;font-size:clamp(14px,2.5vw,26px);letter-spacing:.18em;color:var(--date);text-transform:uppercase}
-.bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:12px}
-.panel{border:1px solid var(--line);background:var(--pan);border-radius:10px;padding:12px 16px;min-width:0}
-.label{display:flex;justify-content:space-between;gap:8px;font-size:13px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:8px}
-.label .stale{color:var(--amber)}
-.value{font-size:clamp(16px,2.6vw,28px);color:var(--green);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sub{font-size:clamp(12px,1.5vw,15px);line-height:1.35;color:var(--dim);margin-top:6px;min-height:1.2em}
-.alarm-value{color:var(--amber)}
-.toolbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding-top:14px;padding-bottom:4px;max-height:240px;overflow:hidden;transition:opacity .5s,max-height .5s,padding .5s}
-body.idle .toolbar{opacity:0;max-height:0;padding-top:0;padding-bottom:0;pointer-events:none}
+.time{font-size:min(27vw,42vh);font-weight:200;letter-spacing:-.02em;line-height:1;text-shadow:0 0 .1em var(--glow2),0 0 .45em var(--glow2);font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;color:var(--green);transition:color 1.4s ease,text-shadow 1.4s ease}
+.colon{display:inline-block;margin:0 .03em;transform:translateY(-.07em);animation:breathe 2s ease-in-out infinite}
+.seconds{font-size:.26em;color:var(--amber);letter-spacing:0;margin-left:.3em;font-weight:300;text-shadow:none;transition:color 1.4s ease}
+.ampm{font-size:.2em;color:var(--dim);letter-spacing:.04em;margin-left:.4em;text-shadow:none;font-weight:300;transition:color 1.4s ease}
+:root[data-style="retro"] .time{font-size:min(25vw,40vh);font-weight:bold;letter-spacing:-.075em;text-shadow:0 0 10px var(--glow1),0 0 28px var(--glow2)}
+:root[data-style="retro"] .colon{animation:none;transform:none;margin:0}
+:root[data-style="retro"] .seconds{font-size:.38em;letter-spacing:-.04em;margin-left:.08em;font-weight:bold;text-shadow:0 0 12px var(--sglow)}
+:root[data-style="retro"] .ampm{letter-spacing:0;margin-left:.3em;font-weight:bold}
+.minute{flex:none;width:min(34vw,360px);height:2px;margin-top:clamp(12px,2.6vh,28px);background:var(--line);border-radius:2px;overflow:hidden;transition:background-color 1.4s ease}
+.minute.off{display:none}
+.minute i{display:block;height:100%;width:100%;background:var(--dim);opacity:.85;transform-origin:left center;transform:scaleX(0)}
+.date{margin-top:clamp(10px,2.2vh,22px);font-size:clamp(16px,2.6vw,28px);font-weight:300;letter-spacing:.06em;color:var(--date);transition:color 1.4s ease}
+:root[data-style="retro"] .date{font-weight:normal;letter-spacing:.18em;text-transform:uppercase}
+.controls{padding-bottom:4px}
+.toolbar{max-height:240px;overflow:hidden;transition:opacity .7s ease,max-height .7s ease,padding .7s ease}
+body.idle .toolbar{opacity:0;max-height:0;padding-top:0;pointer-events:none}
 body.idle{cursor:none}
-button{font:inherit;color:var(--green);background:var(--btn);border:1px solid var(--btnline);border-radius:7px;padding:10px 16px;min-height:44px;font-size:14px;letter-spacing:.06em}
+.bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:12px}
+.panel{border:1px solid var(--line);background:var(--pan);border-radius:16px;padding:12px 16px;min-width:0;transition:border-color 1.4s ease,background-color 1.4s ease}
+:root[data-style="retro"] .panel{border-radius:10px}
+.label{display:flex;justify-content:space-between;gap:8px;font-size:13px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:8px;transition:color 1.4s ease}
+.label .stale{color:var(--amber)}
+.value{font-size:clamp(16px,2.6vw,28px);color:var(--green);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color 1.4s ease}
+.sub{font-size:clamp(12px,1.5vw,15px);line-height:1.35;color:var(--dim);margin-top:6px;min-height:1.2em;transition:color 1.4s ease}
+.alarm-value{color:var(--amber)}
+.toolbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding-top:14px}
+button{font:inherit;color:var(--green);background:var(--btn);border:1px solid var(--btnline);border-radius:999px;padding:10px 18px;min-height:44px;font-size:14px;letter-spacing:.06em;transition:color 1.4s ease,border-color 1.4s ease}
+:root[data-style="retro"] button{border-radius:7px}
 button:active{background:var(--btnact)}
 button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 input:focus-visible,select:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 #themeBtn:before{content:"";display:inline-block;width:.8em;height:.8em;border-radius:50%;background:var(--green);margin-right:.55em;vertical-align:-.05em;box-shadow:0 0 6px var(--glow1)}
-input,select{font:inherit;color:var(--green);background:var(--inp);border:1px solid var(--btnline);border-radius:6px;padding:8px;min-width:0}
+input,select{font:inherit;color:var(--green);background:var(--inp);border:1px solid var(--btnline);border-radius:8px;padding:8px;min-width:0}
 input[type=time]{color-scheme:dark}
 input[type=checkbox]{width:22px;height:22px;accent-color:var(--green)}
-dialog{border:1px solid var(--line);border-radius:12px;background:var(--dlg);color:var(--green);width:min(90vw,380px);box-shadow:0 0 35px #000}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--dlg);color:var(--green);width:min(90vw,400px);max-height:90vh;overflow:auto;box-shadow:0 0 35px #000}
 dialog h3{margin:0 0 8px;letter-spacing:.18em;font-size:16px}
 dialog::backdrop{background:#000b}
-#cityResults button{display:block;width:100%;text-align:left;margin-bottom:6px}
+#cityResults button{display:block;width:100%;text-align:left;margin-bottom:6px;border-radius:10px}
 .dialog-row{display:flex;gap:8px;margin:12px 0;align-items:center;flex-wrap:wrap}
 .dialog-row input{flex:1;width:100%}
 .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:15px}
 .small{font-size:13px;color:var(--dim);line-height:1.5}
+:root[data-style="modern"] #crtRow{display:none}
 .low{color:#ff5a4d!important;animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:.25}}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes pulse{50%{box-shadow:inset 0 0 140px var(--glow2)}}
-#dimOv{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:50;transition:opacity .6s}
+#dimOv{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:50;transition:opacity 1.2s ease}
 #alarmOverlay{display:none;position:absolute;z-index:5;inset:0;background:var(--s2);align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:18px;animation:pulse 1.6s ease-in-out infinite}
 #alarmOverlay.show{display:flex}
-#alarmOverlay strong{font-size:clamp(35px,8vw,75px);color:var(--amber);text-shadow:0 0 18px var(--sglow)}
+#alarmOverlay strong{font-size:clamp(35px,8vw,75px);font-weight:300;color:var(--amber);text-shadow:0 0 18px var(--sglow)}
+:root[data-style="retro"] #alarmOverlay strong{font-weight:bold}
 #alarmOverlay button{font-size:clamp(16px,2.4vw,22px);padding:16px 26px}
 .ring-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-@media(prefers-reduced-motion:reduce){.low{animation:none}#alarmOverlay{animation:none}.screen{transition:none}.toolbar{transition:none}}
-@media(max-width:560px){.bottom{grid-template-columns:1fr}header{letter-spacing:.08em}.status{gap:7px}.brand{display:none}}
-@media(orientation:landscape) and (max-height:430px){.screen{padding:10px 18px}.clock{min-height:0}.time{font-size:min(30vh,24vw)}.date{margin-top:8px}.panel{padding:7px 10px}.toolbar{padding-top:7px}button{padding:6px 12px;min-height:36px}}
+@media(prefers-reduced-motion:reduce){.low{animation:none}#alarmOverlay{animation:none}.colon{animation:none}.screen{transition:none}.controls{transition:none}}
+@media(max-width:560px){.bottom{grid-template-columns:1fr}header{letter-spacing:.08em}.status{gap:7px}.brand{display:none!important}}
+@media(orientation:landscape) and (max-height:430px){.screen{padding:10px 18px}.clock{min-height:0}:root[data-style] .time{font-size:min(30vh,24vw)}.date{margin-top:6px}.minute{margin-top:6px}.panel{padding:7px 10px}.toolbar{padding-top:7px}button{padding:6px 14px;min-height:36px}}
 </style>
 </head>
 <body>
 <main class="screen">
   <header><span class="brand">Retro Desk Clock</span><span class="status"><span id="batteryTop">BAT --</span><span id="clockStatus">LOCAL TIME</span></span></header>
   <section class="clock">
-    <div class="time" id="time" role="timer" aria-live="off" aria-label="Current time">--:--</div>
-    <div class="date" id="date">LOADING DATE</div>
+    <div class="time" id="time" role="timer" aria-live="off" aria-label="Current time"><span id="tH">--</span><span class="colon" id="tC">:</span><span id="tM">--</span><span class="seconds" id="tS"></span><span class="ampm" id="tA"></span></div>
+    <div class="minute off" id="minute"><i id="minBar"></i></div>
+    <div class="date" id="date">&nbsp;</div>
   </section>
-  <section class="bottom">
-    <div class="panel"><div class="label"><span>Next alarm</span></div><div class="value alarm-value" id="alarmDisplay">Not set</div><div class="sub" id="alarmSub">Alarm works while this page stays open</div></div>
-    <div class="panel weather"><div class="label"><span>Weather</span><span id="wxAge"></span></div><div class="value" id="weather">Not loaded</div><div class="sub" id="weatherSub">Tap WEATHER · long-press panel to change city</div><div class="sub" id="weatherSub2"></div><div class="sub" id="weatherSub3"></div></div>
-  </section>
-  <nav class="toolbar" aria-label="Controls">
-    <button id="fullscreenBtn">FULLSCREEN</button><button id="weatherBtn">WEATHER</button><button id="themeBtn">THEME</button><button id="dimBtn">BRIGHTNESS</button><button id="alarmBtn">SET ALARM</button><button id="settingsBtn">SETTINGS</button>
-  </nav>
+  <div class="controls" id="controls">
+    <section class="bottom">
+      <div class="panel"><div class="label"><span>Next alarm</span></div><div class="value alarm-value" id="alarmDisplay">Not set</div><div class="sub" id="alarmSub">Alarm works while this page stays open</div></div>
+      <div class="panel weather"><div class="label"><span>Weather</span><span id="wxAge"></span></div><div class="value" id="weather">Not loaded</div><div class="sub" id="weatherSub">Tap WEATHER · long-press panel to change city</div><div class="sub" id="weatherSub2"></div><div class="sub" id="weatherSub3"></div></div>
+    </section>
+    <nav class="toolbar" aria-label="Controls">
+      <button id="fullscreenBtn">FULLSCREEN</button><button id="weatherBtn">WEATHER</button><button id="themeBtn">THEME</button><button id="dimBtn">BRIGHT</button><button id="nightBtn">NIGHT</button><button id="alarmBtn">SET ALARM</button><button id="settingsBtn">SETTINGS</button>
+    </nav>
+  </div>
   <div id="alarmOverlay" role="alertdialog" aria-label="Alarm ringing"><strong>WAKE UP!</strong><div id="ringTime">ALARM</div><div class="ring-actions"><button id="snoozeBtn">SNOOZE</button><button id="dismissBtn">DISMISS</button></div></div>
 </main>
 <div id="dimOv" aria-hidden="true"></div>
@@ -105,10 +131,16 @@ dialog::backdrop{background:#000b}
 </dialog>
 <dialog id="setDialog" aria-labelledby="setTitle">
   <h3 id="setTitle">SETTINGS</h3>
+  <label class="row"><span>Digit style</span><select id="sStyle"><option value="retro">Classic (bold mono)</option><option value="modern">Modern (thin)</option></select></label>
   <label class="row"><span>24-hour time</span><input type="checkbox" id="sH24"></label>
   <label class="row"><span>Show seconds</span><input type="checkbox" id="sSec"></label>
+  <label class="row"><span>Minute progress line</span><input type="checkbox" id="sMin"></label>
+  <label class="row" id="crtRow"><span>CRT scanlines (classic)</span><input type="checkbox" id="sCrt"></label>
   <label class="row"><span>Temperature</span><select id="sUnit"><option value="C">°C</option><option value="F">°F</option></select></label>
-  <label class="row"><span>CRT scanlines</span><input type="checkbox" id="sCrt"></label>
+  <label class="row"><span>Night mode</span><select id="sNight"><option value="auto">Auto (schedule)</option><option value="on">Always on</option><option value="off">Off</option></select></label>
+  <label class="row"><span>Night starts</span><input type="time" id="sNs"></label>
+  <label class="row"><span>Night ends</span><input type="time" id="sNe"></label>
+  <p class="small">Night mode switches to a dim red theme, hides seconds, and dims the screen so the room stays dark.</p>
   <label class="row"><span>Snooze length</span><select id="sSnooze"><option value="5">5 min</option><option value="9">9 min</option><option value="10">10 min</option><option value="15">15 min</option></select></label>
   <div class="dialog-row"><button id="closeSet">CLOSE</button></div>
 </dialog>
@@ -117,39 +149,76 @@ dialog::backdrop{background:#000b}
   const $=id=>document.getElementById(id);
   const pad=n=>String(n).padStart(2,"0");
   const store={get:function(k,d){try{const v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;}},set:function(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
+  function vt(v,d){return /^\d\d:\d\d$/.test(v)?v:d;}
+  function toMin(v){return parseInt(v.slice(0,2),10)*60+parseInt(v.slice(3),10);}
 
-  // ---- state ----
+  // ---- state (all declared up front so early calls never hit an uninitialised variable) ----
   let h24=store.get("h24","1")==="1";
   let showSec=store.get("sec","1")==="1";
+  let minLine=store.get("minline","0")==="1";
   let unit=store.get("unit","C")==="F"?"F":"C";
   let crt=store.get("crt","1")==="1";
+  let style=store.get("style","retro")==="modern"?"modern":"retro";
   let snoozeMin=parseInt(store.get("snooze","9"),10)||9;
+  let nightMode=store.get("night","auto");if(["auto","on","off"].indexOf(nightMode)<0)nightMode="auto";
+  let nightStart=vt(store.get("nstart","22:00"),"22:00"),nightEnd=vt(store.get("nend","06:30"),"06:30");
+  let nightActive=false;
   let alarmAt=store.get("alarm","");if(!/^\d\d:\d\d$/.test(alarmAt))alarmAt=null;
   let snoozeAt=null,alarmFiredKey="",audioContext=null,audioReady=false,alarmInterval=null,ringing=false;
-  const themes=["green","amber","red","ice"];let themeIdx=Math.max(0,themes.indexOf(store.get("theme","green")));
-  const dims=["OFF","60","30","AUTO"];let dimIdx=Math.max(0,dims.indexOf(store.get("dim","OFF")));let lastDim=-1;
+  let idleT=null,wasIdle=false,minVisible=false,lastW=null,savedLoc=null,weatherTimer=null;
+  const themes=["green","amber","red","ice","warm","night"];let themeIdx=Math.max(0,themes.indexOf(store.get("theme","green")));
+  const dims=["OFF","60","30"];let dimIdx=Math.max(0,dims.indexOf(store.get("dim","OFF")));let lastDim=-1;
+  const V="\uFE0E"; // text presentation so weather icons take the theme colour
+  const icons={0:"\u2600"+V,1:"\u2600"+V,2:"\u26C5"+V,3:"\u2601"+V,45:"\u224B",48:"\u224B",51:"\u2602"+V,53:"\u2602"+V,55:"\u2602"+V,61:"\u2602"+V,63:"\u2602"+V,65:"\u2602"+V,71:"\u2744"+V,73:"\u2744"+V,75:"\u2744"+V,80:"\u2602"+V,81:"\u2602"+V,82:"\u2602"+V,95:"\u26A1"+V,96:"\u26A1"+V,99:"\u26A1"+V};
+  const descriptions={0:"Clear sky",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Light drizzle",53:"Drizzle",55:"Dense drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",71:"Light snow",73:"Snow",75:"Heavy snow",80:"Rain showers",81:"Showers",82:"Heavy showers",95:"Thunderstorm",96:"Thunderstorm / hail",99:"Thunderstorm / hail"};
+  try{savedLoc=JSON.parse(localStorage.getItem("clockLoc")||"null");}catch(e){}
 
   // ---- formatting ----
   function fmtT(v){if(h24)return v;const H=+v.slice(0,2);return (H%12||12)+":"+v.slice(3)+(H<12?" AM":" PM");}
   function fmtD(d){const H=d.getHours(),M=pad(d.getMinutes());return h24?pad(H)+":"+M:(H%12||12)+":"+M+(H<12?"a":"p");}
+  function T(c){return Math.round(unit==="F"?c*9/5+32:c);}
 
-  // ---- theme / brightness / crt ----
-  function applyTheme(){document.documentElement.setAttribute("data-theme",themes[themeIdx]);$("themeBtn").textContent="THEME: "+themes[themeIdx].toUpperCase();}
-  function dimLabel(){const m=dims[dimIdx];$("dimBtn").textContent="BRIGHTNESS: "+(m==="OFF"?"100%":m==="AUTO"?"AUTO":m+"%");}
+  // ---- theme / style / night / brightness ----
+  function applyTheme(){
+    document.documentElement.setAttribute("data-theme",nightActive?"night":themes[themeIdx]);
+    $("themeBtn").textContent="THEME: "+themes[themeIdx].toUpperCase();
+  }
+  function applyStyle(){document.documentElement.setAttribute("data-style",style);lastDate="";tick();}
+  function applyCrt(){document.documentElement.setAttribute("data-crt",crt?"on":"off");}
+  function dimLabel(){const m=dims[dimIdx];$("dimBtn").textContent="BRIGHT: "+(m==="OFF"?"100":m)+"%";}
+  function nightLabel(){$("nightBtn").textContent="NIGHT: "+nightMode.toUpperCase();}
+  function isNight(now){
+    if(nightMode==="on")return true;
+    if(nightMode==="off")return false;
+    const m=now.getHours()*60+now.getMinutes(),s=toMin(nightStart),e=toMin(nightEnd);
+    if(s===e)return false;
+    return s<e?(m>=s&&m<e):(m>=s||m<e);
+  }
+  function applyVisibility(){
+    $("tS").style.display=(showSec&&!nightActive)?"":"none";
+    minVisible=minLine&&!nightActive;
+    $("minute").classList.toggle("off",!minVisible);
+  }
+  function refreshNight(now){
+    const n=!ringing&&isNight(now); // an ringing alarm always uses the normal, readable theme
+    if(n===nightActive)return;
+    nightActive=n;
+    document.documentElement.setAttribute("data-night",n?"1":"0");
+    applyTheme();applyVisibility();
+  }
   function applyDim(now){
     let o=0;const m=dims[dimIdx];
     if(m==="60")o=.4;else if(m==="30")o=.7;
-    else if(m==="AUTO"){const h=now.getHours();if(h>=22||h<6)o=.7;}
+    if(nightActive)o=Math.max(o,.35);
     if(ringing)o=0;
     if(o!==lastDim){lastDim=o;$("dimOv").style.opacity=o;}
   }
-  function applyCrt(){document.documentElement.setAttribute("data-crt",crt?"on":"off");}
 
   // ---- alarm display ----
   function alarmUI(){
-    if(snoozeAt){$("alarmDisplay").textContent=fmtT(snoozeAt);$("alarmSub").textContent="Snoozed · rings again at "+fmtT(snoozeAt);return;}
-    if(alarmAt){$("alarmDisplay").textContent=fmtT(alarmAt);$("alarmSub").textContent=audioReady?"Armed daily · keep this page open":"Armed · tap the screen once to enable sound";return;}
-    $("alarmDisplay").textContent="Not set";$("alarmSub").textContent="Alarm works while this page stays open";
+    if(snoozeAt){$("alarmDisplay").textContent=fmtT(snoozeAt);$("alarmSub").textContent="Snoozed · rings again at "+fmtT(snoozeAt);}
+    else if(alarmAt){$("alarmDisplay").textContent=fmtT(alarmAt);$("alarmSub").textContent=audioReady?"Armed daily · keep this page open":"Armed · tap the screen once to enable sound";}
+    else{$("alarmDisplay").textContent="Not set";$("alarmSub").textContent="Alarm works while this page stays open";}
   }
   // Browsers only allow sound after a user gesture, so unlock audio on the first tap (matters after a reload).
   function unlockAudio(){
@@ -160,16 +229,23 @@ dialog::backdrop{background:#000b}
   document.addEventListener("pointerdown",unlockAudio);
 
   // ---- main tick ----
-  let lastHtml="",lastDate="";
+  const tH=$("tH"),tM=$("tM"),tS=$("tS"),tA=$("tA"),minBar=$("minBar");
+  function setT(el,v){if(el.textContent!==v)el.textContent=v;}
+  let lastDate="";
   function tick(){
     const now=new Date();
+    refreshNight(now);
     const hr=now.getHours(),dh=h24?hr:(hr%12||12);
-    let html=pad(dh)+":"+pad(now.getMinutes());
-    if(showSec)html+='<span class="seconds">'+pad(now.getSeconds())+"</span>";
-    if(!h24)html+='<span class="ampm">'+(hr<12?"AM":"PM")+"</span>";
-    if(html!==lastHtml){lastHtml=html;$("time").innerHTML=html;}
+    setT(tH,(h24||style==="retro")?pad(dh):String(dh));
+    setT(tM,pad(now.getMinutes()));
+    if(showSec&&!nightActive)setT(tS,pad(now.getSeconds()));
+    if(h24){if(tA.style.display!=="none")tA.style.display="none";}
+    else{if(tA.style.display==="none")tA.style.display="";setT(tA,hr<12?"AM":"PM");}
+    if(minVisible)minBar.style.transform="scaleX("+((now.getSeconds()+now.getMilliseconds()/1000)/60).toFixed(4)+")";
     applyDim(now);
-    const ds=now.toLocaleDateString(undefined,{weekday:"long",day:"2-digit",month:"long",year:"numeric"}).toUpperCase();
+    const ds=(style==="retro"
+      ?now.toLocaleDateString(undefined,{weekday:"long",day:"2-digit",month:"long",year:"numeric"})
+      :now.toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"}));
     if(ds!==lastDate){lastDate=ds;$("date").textContent=ds;}
     const hm=pad(now.getHours())+":"+pad(now.getMinutes());
     if(!ringing&&(hm===alarmAt||hm===snoozeAt)){
@@ -177,7 +253,6 @@ dialog::backdrop{background:#000b}
       if(alarmFiredKey!==key){alarmFiredKey=key;ring(hm);}
     }
   }
-  alarmUI();tick();setInterval(tick,250);
 
   // ---- battery (header only) ----
   async function batteryInfo(){
@@ -185,9 +260,9 @@ dialog::backdrop{background:#000b}
     try{
       const b=await navigator.getBattery();
       function draw(){
-        const pct=Math.round(b.level*100);
+        const pct=Math.round(b.level*100),low=pct<=20&&!b.charging;
         $("batteryTop").textContent="BAT "+pct+"%"+(b.charging?" ⚡":"");
-        $("batteryTop").classList.toggle("low",pct<=20&&!b.charging);
+        $("batteryTop").classList.toggle("low",low);
       }
       draw();b.addEventListener("levelchange",draw);b.addEventListener("chargingchange",draw);
     }catch(e){$("batteryTop").textContent="BAT --";}
@@ -200,13 +275,7 @@ dialog::backdrop{background:#000b}
   });
 
   // ---- weather ----
-  const descriptions={0:"Clear sky",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Light drizzle",53:"Drizzle",55:"Dense drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",71:"Light snow",73:"Snow",75:"Heavy snow",80:"Rain showers",81:"Showers",82:"Heavy showers",95:"Thunderstorm",96:"Thunderstorm / hail",99:"Thunderstorm / hail"};
-  const V="\uFE0E"; // text presentation so icons take the theme colour
-  const icons={0:"\u2600"+V,1:"\u2600"+V,2:"\u26C5"+V,3:"\u2601"+V,45:"\u224B",48:"\u224B",51:"\u2602"+V,53:"\u2602"+V,55:"\u2602"+V,61:"\u2602"+V,63:"\u2602"+V,65:"\u2602"+V,71:"\u2744"+V,73:"\u2744"+V,75:"\u2744"+V,80:"\u2602"+V,81:"\u2602"+V,82:"\u2602"+V,95:"\u26A1"+V,96:"\u26A1"+V,99:"\u26A1"+V};
-  let savedLoc=null,weatherTimer=null,lastW=null;
-  try{savedLoc=JSON.parse(localStorage.getItem("clockLoc")||"null");}catch(e){}
   function saveLoc(l){savedLoc=l;try{localStorage.setItem("clockLoc",JSON.stringify(l));}catch(e){}}
-  function T(c){return Math.round(unit==="F"?c*9/5+32:c);}
   function hm(t){const H=+t.slice(11,13),M=t.slice(14,16);return h24?pad(H)+":"+M:(H%12||12)+":"+M+(H<12?"a":"p");}
   function renderWeather(){
     if(!lastW)return;const d=lastW.d,loc=lastW.loc,c=d.current,u="°"+unit;
@@ -307,9 +376,8 @@ dialog::backdrop{background:#000b}
   ["pointerup","pointerleave","pointercancel"].forEach(function(e){wp.addEventListener(e,lpClear);});
   wp.addEventListener("contextmenu",function(e){e.preventDefault();});
 
-  // ---- auto-hide toolbar ----
-  let idleT=null,wasIdle=false;
-  function wake(){document.body.classList.remove("idle");clearTimeout(idleT);idleT=setTimeout(goIdle,6000);}
+  // ---- auto-hide controls (resting state = clock, date and one quiet info line) ----
+  function wake(){document.body.classList.remove("idle");clearTimeout(idleT);idleT=setTimeout(goIdle,8000);}
   function goIdle(){
     if(ringing||document.querySelector("dialog[open]")){wake();return;}
     document.body.classList.add("idle");
@@ -317,24 +385,32 @@ dialog::backdrop{background:#000b}
   // remember whether this tap was only "waking" the UI, so it doesn't also trigger what's underneath
   document.addEventListener("pointerdown",function(){wasIdle=document.body.classList.contains("idle");},true);
   ["pointerdown","pointermove","keydown","touchstart"].forEach(function(e){document.addEventListener(e,wake,{passive:true});});
-  wake();
 
-  // ---- settings ----
+  // ---- settings & toolbar ----
   function setH24(v){h24=v;store.set("h24",h24?"1":"0");tick();alarmUI();renderWeather();}
   $("time").addEventListener("click",function(){if(wasIdle){wasIdle=false;return;}setH24(!h24);});
   $("themeBtn").addEventListener("click",function(){themeIdx=(themeIdx+1)%themes.length;store.set("theme",themes[themeIdx]);applyTheme();});
   $("dimBtn").addEventListener("click",function(){dimIdx=(dimIdx+1)%dims.length;store.set("dim",dims[dimIdx]);dimLabel();applyDim(new Date());});
+  $("nightBtn").addEventListener("click",function(){
+    const order=["auto","on","off"];nightMode=order[(order.indexOf(nightMode)+1)%order.length];
+    store.set("night",nightMode);nightLabel();refreshNight(new Date());
+  });
   $("settingsBtn").addEventListener("click",function(){
-    $("sH24").checked=h24;$("sSec").checked=showSec;$("sUnit").value=unit;$("sCrt").checked=crt;$("sSnooze").value=String(snoozeMin);
+    $("sStyle").value=style;$("sH24").checked=h24;$("sSec").checked=showSec;$("sMin").checked=minLine;$("sCrt").checked=crt;$("sUnit").value=unit;
+    $("sNight").value=nightMode;$("sNs").value=nightStart;$("sNe").value=nightEnd;$("sSnooze").value=String(snoozeMin);
     $("setDialog").showModal();
   });
+  $("sStyle").addEventListener("change",function(e){style=e.target.value==="retro"?"retro":"modern";store.set("style",style);applyStyle();});
   $("sH24").addEventListener("change",function(e){setH24(e.target.checked);});
-  $("sSec").addEventListener("change",function(e){showSec=e.target.checked;store.set("sec",showSec?"1":"0");tick();});
-  $("sUnit").addEventListener("change",function(e){unit=e.target.value==="F"?"F":"C";store.set("unit",unit);renderWeather();});
+  $("sSec").addEventListener("change",function(e){showSec=e.target.checked;store.set("sec",showSec?"1":"0");applyVisibility();tick();});
+  $("sMin").addEventListener("change",function(e){minLine=e.target.checked;store.set("minline",minLine?"1":"0");applyVisibility();});
   $("sCrt").addEventListener("change",function(e){crt=e.target.checked;store.set("crt",crt?"1":"0");applyCrt();});
+  $("sUnit").addEventListener("change",function(e){unit=e.target.value==="F"?"F":"C";store.set("unit",unit);renderWeather();});
+  $("sNight").addEventListener("change",function(e){nightMode=e.target.value;store.set("night",nightMode);nightLabel();refreshNight(new Date());});
+  $("sNs").addEventListener("change",function(e){nightStart=vt(e.target.value,nightStart);store.set("nstart",nightStart);refreshNight(new Date());});
+  $("sNe").addEventListener("change",function(e){nightEnd=vt(e.target.value,nightEnd);store.set("nend",nightEnd);refreshNight(new Date());});
   $("sSnooze").addEventListener("change",function(e){snoozeMin=parseInt(e.target.value,10)||9;store.set("snooze",String(snoozeMin));});
   $("closeSet").addEventListener("click",function(){$("setDialog").close();});
-  applyTheme();dimLabel();applyCrt();
 
   // burn-in protection: nudge the layout every 3 minutes
   setInterval(function(){document.querySelector(".screen").style.transform="translate("+Math.round(Math.random()*16-8)+"px,"+Math.round(Math.random()*12-6)+"px)";},180000);
@@ -378,6 +454,7 @@ dialog::backdrop{background:#000b}
   }
   function ring(t){
     ringing=true;
+    refreshNight(new Date());
     $("alarmOverlay").classList.add("show");
     $("ringTime").textContent="ALARM · "+fmtT(t);
     $("snoozeBtn").textContent="SNOOZE "+snoozeMin+" MIN";
@@ -386,6 +463,7 @@ dialog::backdrop{background:#000b}
   function stopRing(){
     ringing=false;$("alarmOverlay").classList.remove("show");
     if(alarmInterval)clearInterval(alarmInterval);alarmInterval=null;
+    refreshNight(new Date());
   }
   function dismiss(){stopRing();snoozeAt=null;alarmUI();}
   function snooze(){
@@ -403,6 +481,10 @@ dialog::backdrop{background:#000b}
   }
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")keepAwake();});
   keepAwake();
+
+  // ---- start ----
+  applyCrt();dimLabel();nightLabel();applyTheme();applyVisibility();
+  applyStyle();alarmUI();tick();setInterval(tick,250);wake();
 })();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>
